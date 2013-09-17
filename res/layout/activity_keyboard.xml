@@ -1,0 +1,333 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/sunburst"
+    tools:context=".Keyboard" >
+
+    <View
+        android:id="@+id/fullscreen_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/sunburst"
+        android:fitsSystemWindows="true" >
+        
+        <LinearLayout
+            android:id="@+id/fullscreen_content_controls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/fullscreen_content_controls2"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="0dp"
+            android:weightSum="1.0" >
+
+            <ImageView
+                android:id="@+id/keyMid0"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/keylow0"
+                android:gravity="bottom|center_vertical|center_horizontal"
+                android:text="NoteName?" />
+
+            <ImageView
+                android:id="@+id/keyMid1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/keylow1"
+                android:gravity="bottom|center_vertical|center_horizontal"
+                android:text="NoteName?" />
+
+            <ImageView
+                android:id="@+id/keyMid2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/keylow2"
+				android:text="NoteName?" />
+
+            <ImageView
+                android:id="@+id/keyMid3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/keylow3"
+                android:gravity="bottom|center_vertical|center_horizontal"
+				android:text="NoteName?" />
+
+            <ImageView
+                android:id="@+id/keyMid4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/keylow5"
+                android:gravity="bottom|center_vertical|center_horizontal"
+                android:text="NoteName?" />
+
+            <ImageView
+                android:id="@+id/keyMid5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/keylow4"
+                android:gravity="bottom|center_vertical|center_horizontal"
+                android:text="NoteName?" />
+
+            <ImageView
+                android:id="@+id/keyMid6"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/keylow6"
+                android:gravity="bottom|center_vertical|center_horizontal"
+                android:text="NoteName?" />
+
+            <ImageView
+                android:id="@+id/keyMid7"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/keylow7"
+                android:gravity="bottom|center_vertical|center_horizontal"
+                android:text="NoteName?" />
+
+            <ImageView
+                android:id="@+id/keyMid8"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/keylow8"
+                android:gravity="bottom|center_vertical|center_horizontal"
+                android:text="NoteName?" />
+
+            <ImageView
+                android:id="@+id/keyMid9"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/keylow9"
+                android:gravity="bottom|center_vertical|center_horizontal"
+                android:text="NoteName?" />
+        </LinearLayout>
+ <LinearLayout
+            android:id="@+id/fullscreen_content_controls2"
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/TopBarLayout"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="0dp"
+            android:weightSum="1.0" >
+
+            <ImageView
+                android:id="@+id/keyLow0"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/keylow0"
+                android:gravity="bottom|center_vertical|center_horizontal"
+                android:text="NoteName?" />
+
+            <ImageView
+                android:id="@+id/keyLow1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/keylow1"
+                android:gravity="bottom|center_vertical|center_horizontal"
+                android:text="NoteName?" />
+
+            <ImageView
+                android:id="@+id/keyLow2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/keylow2"
+                android:gravity="bottom|center_vertical|center_horizontal"
+                android:text="NoteName?" />
+
+            <ImageView
+                android:id="@+id/keyLow3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/keylow3"
+                android:gravity="bottom|center_vertical|center_horizontal"
+                android:text="NoteName?" />
+
+            <ImageView
+                android:id="@+id/keyLow4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/keylow5"
+                android:gravity="bottom|center_vertical|center_horizontal"
+                android:text="NoteName?" />
+
+            <ImageView
+                android:id="@+id/keyLow5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/keylow4"
+                android:gravity="bottom|center_vertical|center_horizontal"
+                android:text="NoteName?" />
+
+            <ImageView
+                android:id="@+id/keyLow6"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/keylow6"
+                android:gravity="bottom|center_vertical|center_horizontal"
+                android:text="NoteName?" />
+
+            <ImageView
+                android:id="@+id/keyLow7"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/keylow7"
+                android:gravity="bottom|center_vertical|center_horizontal"
+                android:text="NoteName?" />
+
+            <ImageView
+                android:id="@+id/keyLow8"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/keylow8"
+                android:gravity="bottom|center_vertical|center_horizontal"
+                android:text="NoteName?" />
+
+            <ImageView
+                android:id="@+id/keyLow9"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="0.1"
+                android:background="@drawable/keylow9"
+                android:gravity="bottom|center_vertical|center_horizontal"
+                android:text="NoteName?" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/TopBarLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="11dp"
+            android:weightSum="1.0" >
+
+            <Button
+                android:id="@+id/PlayButton"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/playbutton"
+                android:paddingLeft="20dp"
+                android:text="" />
+
+            <EditText
+                android:id="@+id/PointlessSpace1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.40"
+                android:ems="10"
+                android:visibility="invisible" >
+
+                <requestFocus />
+            </EditText>
+
+            <ImageView
+                android:id="@+id/ProjectLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.08"
+                android:adjustViewBounds="true"
+                android:maxHeight="125dp"
+                android:maxWidth="125dp"
+                android:minHeight="75dp"
+                android:minWidth="75dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/logo" />
+
+            <EditText
+                android:id="@+id/PointlessSpace2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.38"
+                android:ems="10"
+                android:visibility="invisible" >
+                <requestFocus />
+            </EditText>
+
+            <Button
+                android:id="@+id/SettingsButton"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.15"
+                android:background="@drawable/settingsbutton"
+                android:text="" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</FrameLayout>

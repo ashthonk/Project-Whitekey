@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="scaleName">
+        <item >Pentatonic Major</item><item >Pentatonic Minor</item>
+        <item >Major</item>
+        <item >Minor Natural</item>
+        <item >Minor Harmonic</item>
+        <item >Minor Melodic</item>
+        <item >Gypsy Minor</item>
+        <item >Gypsy Major</item>
+        
+    </string-array>
+    <string-array name="rootNote"><item >A</item><item >Bb</item><item >B</item><item>C</item><item >Db</item><item >D</item><item >Eb</item><item >E</item><item >F</item>
+    <item >Gb</item>
+    <item >G</item>
+    <item >Ab</item>
+    
+</string-array>
+    <string-array name="rootNum"><item >0</item><item >1</item><item >2</item><item >3</item><item >4</item><item >5</item><item >6</item><item >7</item><item >8</item><item >9</item><item >10</item><item >11</item></string-array>
+    <string-array name="octave"><item >1</item><item >2</item><item >3</item><item >4</item></string-array>
+    
+</resources>

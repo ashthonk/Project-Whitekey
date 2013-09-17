@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+        <PreferenceCategory
+                android:title="Key Change">
+                <ListPreference
+                        android:title="Scale Name"
+                        android:summary="This preference allows to select an item in a array"
+                        android:key="listPref"
+                        android:defaultValue="digiGreen"
+                        android:entries="@array/scaleName"
+                        android:entryValues="@array/scaleName" />
+                <ListPreference
+                        android:title="Root Note"
+                        android:summary="This preference allows to select an item in a array"
+                        android:key="listPrefRN"
+                        android:entries="@array/rootNote"
+                        android:entryValues="@array/rootNum" />
+                <ListPreference
+                        android:title="Octave"
+                        android:summary="This preference allows to select an item in a array"
+                        android:key="listPrefO"
+                        android:entries="@array/octave"
+                        android:entryValues="@array/octave" />
+
+        </PreferenceCategory>
+        
+
+</PreferenceScreen>
