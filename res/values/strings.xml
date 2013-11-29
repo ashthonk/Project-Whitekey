@@ -7,5 +7,6 @@
     <string name="KeyDescription">This is a key.</string>
     <string name="set_preferences">set_preferences</string>
     <string name="rootNote">rootNote</string>
+    <string name="songChooserPrompt">Select Back Track</string>
 
 </resources>
