@@ -7,6 +7,8 @@ package com.projectwhitekey;
  * Jace: Initialization and handling of the soundPlayer. Button Events using OnTouch implementation. Calls to AudioTrackSoundPlayer Class. getPrefs method. 
  * Andrew: Initialization of View array, calls to Note and Scale classes, remapping of keyboard upon closure of Preferences menu
  */
+import java.io.IOException;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -35,12 +37,16 @@ public class Keyboard extends Activity {
 	private String					RootNote;					// Taken from prefs
 	private String					Octave;					// Taken from prefs
 	private MediaPlayer				mp;
+	private Context 				appContext;
 
 	// Called when the Activity is First Created (Only happens once)
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_keyboard);
+		
+		appContext = getApplicationContext();
+		mp = MediaPlayer.create(appContext, R.raw.whitekey);
 
 		// Set up each visual button in an array of their views from lowest to highest
 		keys = new View[20];
@@ -69,9 +75,7 @@ public class Keyboard extends Activity {
 		Note rootNotes = new Note(notefile);
 		everyNote = new Note[88];
 		for (int i = 0; i < 88; i++)
-			{
 				everyNote[i] = new Note(i);
-			}
 
 		// Actually get the desired notes to map the keyboard. Mapping takes place further down
 		keybScale = new Scale(rootNotes, Scale.scaleType.pentatonic_major, everyNote);
@@ -98,40 +102,69 @@ public class Keyboard extends Activity {
 		Button startBtn = (Button) findViewById(R.id.PlayButton);
 		startBtn.setOnClickListener(new View.OnClickListener() {
 
-			public void onClick(View v) {
+			public void onClick(View v) 
+			{
 
 				// Create the Mediaplayer to handle the background track which is triggered by the play button
-				Context appContext = getApplicationContext();
+				appContext = getApplicationContext();
+				mp.setLooping(false);
 
 				Spinner backTrackSpinner = (Spinner) findViewById(R.id.songChooser);
 				// Get the currently selected backtrack
 				String currentBackTrack = backTrackSpinner.getSelectedItem().toString();
 				int rawSongId;
+				String dataSrc;
 
 				if (currentBackTrack.equals("Jazz Drums"))
-					{
+				{
 						rawSongId = R.raw.whitekey;
-					} else if (currentBackTrack.equals("Happiest Man"))
-					{
+						dataSrc = "" + rawSongId;
+				}
+				
+				else if (currentBackTrack.equals("Happiest Man"))
+				{
 						rawSongId = R.raw.happiestman;
-					} else if (currentBackTrack.equals("Smooth Jam (short)"))
-					{
-						rawSongId = R.raw.smoothjamshort;
-					} else if (currentBackTrack.equals("Smooth Jam (long)"))
-					{
-						rawSongId = R.raw.smoothjamlong;
-					} else
-					{
-						System.out.println("none of these options were valid.");
-						rawSongId = R.raw.whitekey;
-					}
-				mp = MediaPlayer.create(appContext, rawSongId);
-				mp.setLooping(false); // Changed for the 2 Dec demo. Encourages short spurts of trails TODO set to true
-				if(mp.isPlaying()){
-					mp.pause();
+						dataSrc = "" + rawSongId;
+				} 
+				else if (currentBackTrack.equals("Smooth Jam (short)"))
+				{
+					rawSongId = R.raw.smoothjamshort;
+					dataSrc = "" + rawSongId;
+				} 
+				else if (currentBackTrack.equals("Smooth Jam (long)"))
+				{
+					rawSongId = R.raw.smoothjamlong;
+					dataSrc = "" + rawSongId;
 				}
 				else
+				{
+						System.out.println("none of these options were valid.");
+						rawSongId = R.raw.whitekey;
+						dataSrc = "" + rawSongId;
+				}
+				//mp = MediaPlayer.create(appContext, rawSongId);
+				
+				try 
+				{
+					mp.setDataSource(dataSrc);
+				} 
+				catch (Exception e) 
+				{
+					System.err.println("mp.SetdataSource Failure:");
+					e.printStackTrace();
+				}
+				
+				
+				if(mp.isPlaying())
+				{
+					mp.pause();
+					System.out.println("BACKTRACK pausing!");
+				}
+				else
+				{
 					mp.start();
+					System.out.println("BACKTRACK starting!");
+				}
 			}
 		});
 
