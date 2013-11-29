@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ public class Keyboard extends Activity {
 	private String					Octave;					// Taken from prefs
 	private MediaPlayer				mp;
 	private Context 				appContext;
+	private Boolean					currentlyPlaying = false;
 
 	// Called when the Activity is First Created (Only happens once)
 	@Override
@@ -107,46 +109,49 @@ public class Keyboard extends Activity {
 
 				// Create the Mediaplayer to handle the background track which is triggered by the play button
 				appContext = getApplicationContext();
-				mp.setLooping(false);
+				mp.setLooping(true);
 
 				Spinner backTrackSpinner = (Spinner) findViewById(R.id.songChooser);
 				// Get the currently selected backtrack
 				String currentBackTrack = backTrackSpinner.getSelectedItem().toString();
 				int rawSongId;
-				String dataSrc;
 
-				if (currentBackTrack.equals("Jazz Drums"))
+				if (currentBackTrack.equals("Jazz drums"))
 				{
 						rawSongId = R.raw.whitekey;
-						dataSrc = "" + rawSongId;
 				}
 				
 				else if (currentBackTrack.equals("Happiest Man"))
 				{
 						rawSongId = R.raw.happiestman;
-						dataSrc = "" + rawSongId;
 				} 
 				else if (currentBackTrack.equals("Smooth Jam (short)"))
 				{
 					rawSongId = R.raw.smoothjamshort;
-					dataSrc = "" + rawSongId;
 				} 
 				else if (currentBackTrack.equals("Smooth Jam (long)"))
 				{
 					rawSongId = R.raw.smoothjamlong;
-					dataSrc = "" + rawSongId;
 				}
 				else
 				{
 						System.out.println("none of these options were valid.");
 						rawSongId = R.raw.whitekey;
-						dataSrc = "" + rawSongId;
 				}
 				//mp = MediaPlayer.create(appContext, rawSongId);
 				
 				try 
 				{
-					mp.setDataSource(dataSrc);
+					mp.reset();
+					AssetFileDescriptor afd = appContext.getResources().openRawResourceFd(rawSongId);
+					mp.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+					afd.close();
+					mp.prepare();
+					
+					System.out.println("Attempting to reset MP");
+					//mp.reset();
+
+					
 				} 
 				catch (Exception e) 
 				{
@@ -155,15 +160,17 @@ public class Keyboard extends Activity {
 				}
 				
 				
-				if(mp.isPlaying())
+				if(currentlyPlaying)
 				{
 					mp.pause();
 					System.out.println("BACKTRACK pausing!");
+					currentlyPlaying = false;
 				}
 				else
 				{
 					mp.start();
 					System.out.println("BACKTRACK starting!");
+					currentlyPlaying = true;
 				}
 			}
 		});
@@ -302,7 +309,8 @@ public class Keyboard extends Activity {
 	// Called each time the user sees the keyboard layout (e.g. if the user goes to the settings and goes back)
 	// Update the keyboard mappings with the user's desired Scale/Pitch/Root Note
 	@Override
-	public void onStart() {
+	public void onStart() 
+	{
 		super.onStart();
 		getPrefs();
 		Note rootNotes = new Note(notefile);
@@ -330,7 +338,8 @@ public class Keyboard extends Activity {
 	}
 
 	// Retrieve the settings from the Preferences menu
-	private void getPrefs() {
+	private void getPrefs() 
+	{
 
 		// Get the xml/preferences.xml preferences
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
