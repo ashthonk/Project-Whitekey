@@ -81,11 +81,11 @@ public class AudioTrackSoundPlayer
 				
 				//Create a buffer to play the music. We get an adequate buffer by multiplying the minimum buffer size for the desired settings
 				//which are, in our case 44100Hz Mono using PCM 16BIT Encoding (to save space) by 2
-				int bufferSize = 2 * AudioTrack.getMinBufferSize(44100, AudioFormat.CHANNEL_OUT_MONO, AudioFormat.ENCODING_PCM_16BIT);//Create an audio buffer
-				byte[] buffer = new byte[bufferSize];
+				int bufferSize = AudioTrack.getMinBufferSize(44100, AudioFormat.CHANNEL_OUT_STEREO, AudioFormat.ENCODING_PCM_16BIT);//Create an audio buffer
+				byte[] buffer = new byte[bufferSize * 2];
 				
 				//This handles sound quality. Played at 44100 @ Mono PCM 16 bit to conserve memory resources. Will update the Encoding to 24BIT upon Android Support
-				audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, 44100, AudioFormat.CHANNEL_OUT_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferSize, AudioTrack.MODE_STREAM);
+				audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, 44100, AudioFormat.CHANNEL_OUT_STEREO, AudioFormat.ENCODING_PCM_16BIT, bufferSize, AudioTrack.MODE_STREAM);
 
 				InputStream audioStream = null;
 
@@ -93,8 +93,9 @@ public class AudioTrackSoundPlayer
 				bytesWritten = 0;
 				bytesRead = 0;
 				audioTrack.play();
-					audioStream = assetManager.open(path);
-					audioStream.read(buffer, 0, headerOffset);
+				audioStream = assetManager.open(path);
+				audioStream.read(buffer, 0, headerOffset);
+
 					
 					//Read until end of file, or until the user moves his/her finger off the screen. If we include effects later on, remove this one. 
 					while (!stop && bytesWritten < fileSize - headerOffset)
