@@ -32,10 +32,11 @@ public class AudioTrackSoundPlayer
 	
 	public void playNote(String note)
 	{
+		System.out.println("Playing note: " + note);
 		if (!isNotePlaying(note))
 		{
 			PlayThread thread = new PlayThread(note);
-			thread.start();
+			thread.start(); 
 			threadMap.put(note, thread);
 		}
 	}

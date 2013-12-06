@@ -25,28 +25,28 @@ import android.widget.Spinner;
 
 public class Keyboard extends Activity {
 
-	private AudioTrackSoundPlayer	soundPlayer		= null;
-	private View[]					keys			= null;
-	private boolean[]				buttonStates	= null;
-	private Scale					keybScale;					// The scale the keyboard is currently in.
-	private Note[]					everyNote;					// Stores every note availible.
-	private Note[]					currentScale;				// "A" by default
-	private int						rootNum			= 1;
-	private int						octavenum		= 2;
-	private int						notefile		= 1;
-	private String					ScaleName;					// Taken from prefs
-	private String					RootNote;					// Taken from prefs
-	private String					Octave;					// Taken from prefs
+	private AudioTrackSoundPlayer	soundPlayer			= null;
+	private View[]					keys				= null;
+	private boolean[]				buttonStates		= null;
+	private Scale					keybScale;						// The scale the keyboard is currently in.
+	private Note[]					everyNote;						// Stores every note availible.
+	private Note[]					currentScale;					// "A" by default
+	private int						rootNum				= 1;
+	private int						octavenum			= 2;
+	private int						notefile			= 1;
+	private String					ScaleName;						// Taken from prefs
+	private String					RootNote;						// Taken from prefs
+	private String					Octave;						// Taken from prefs
 	private MediaPlayer				mp;
-	private Context 				appContext;
-	private Boolean					currentlyPlaying = false;
+	private Context					appContext;
+	private Boolean					currentlyPlaying	= false;
 
 	// Called when the Activity is First Created (Only happens once)
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_keyboard);
-		
+
 		appContext = getApplicationContext();
 		mp = MediaPlayer.create(appContext, R.raw.whitekey);
 
@@ -77,7 +77,7 @@ public class Keyboard extends Activity {
 		Note rootNotes = new Note(notefile);
 		everyNote = new Note[88];
 		for (int i = 0; i < 88; i++)
-				everyNote[i] = new Note(i);
+			everyNote[i] = new Note(i);
 
 		// Actually get the desired notes to map the keyboard. Mapping takes place further down
 		keybScale = new Scale(rootNotes, Scale.scaleType.pentatonic_major, everyNote);
@@ -104,8 +104,7 @@ public class Keyboard extends Activity {
 		Button startBtn = (Button) findViewById(R.id.PlayButton);
 		startBtn.setOnClickListener(new View.OnClickListener() {
 
-			public void onClick(View v) 
-			{
+			public void onClick(View v) {
 
 				// Create the Mediaplayer to handle the background track which is triggered by the play button
 				appContext = getApplicationContext();
@@ -117,61 +116,54 @@ public class Keyboard extends Activity {
 				int rawSongId;
 
 				if (currentBackTrack.equals("Jazz drums"))
-				{
+					{
 						rawSongId = R.raw.whitekey;
-				}
-				
+					}
+
 				else if (currentBackTrack.equals("Happiest Man"))
-				{
+					{
 						rawSongId = R.raw.happiestman;
-				} 
-				else if (currentBackTrack.equals("Smooth Jam (short)"))
-				{
-					rawSongId = R.raw.smoothjamshort;
-				} 
-				else if (currentBackTrack.equals("Smooth Jam (long)"))
-				{
-					rawSongId = R.raw.smoothjamlong;
-				}
-				else
-				{
+					} else if (currentBackTrack.equals("Smooth Jam (short)"))
+					{
+						rawSongId = R.raw.smoothjamshort;
+					} else if (currentBackTrack.equals("Smooth Jam (long)"))
+					{
+						rawSongId = R.raw.smoothjamlong;
+					} else
+					{
 						System.out.println("none of these options were valid.");
 						rawSongId = R.raw.whitekey;
-				}
-				//mp = MediaPlayer.create(appContext, rawSongId);
-				
-				try 
-				{
-					mp.reset();
-					AssetFileDescriptor afd = appContext.getResources().openRawResourceFd(rawSongId);
-					mp.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
-					afd.close();
-					mp.prepare();
-					
-					System.out.println("Attempting to reset MP");
-					//mp.reset();
+					}
+				// mp = MediaPlayer.create(appContext, rawSongId);
 
-					
-				} 
-				catch (Exception e) 
-				{
-					System.err.println("mp.SetdataSource Failure:");
-					e.printStackTrace();
-				}
-				
-				
-				if(currentlyPlaying)
-				{
-					mp.pause();
-					System.out.println("BACKTRACK pausing!");
-					currentlyPlaying = false;
-				}
-				else
-				{
-					mp.start();
-					System.out.println("BACKTRACK starting!");
-					currentlyPlaying = true;
-				}
+				try
+					{
+						mp.reset();
+						AssetFileDescriptor afd = appContext.getResources().openRawResourceFd(rawSongId);
+						mp.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+						afd.close();
+						mp.prepare();
+
+						System.out.println("Attempting to reset MP");
+						// mp.reset();
+
+					} catch (Exception e)
+					{
+						System.err.println("mp.SetdataSource Failure:");
+						e.printStackTrace();
+					}
+
+				if (currentlyPlaying)
+					{
+						mp.pause();
+						System.out.println("BACKTRACK pausing!");
+						currentlyPlaying = false;
+					} else
+					{
+						mp.start();
+						System.out.println("BACKTRACK starting!");
+						currentlyPlaying = true;
+					}
 			}
 		});
 
@@ -184,44 +176,80 @@ public class Keyboard extends Activity {
 		boolean[] newButtonStates = new boolean[20];
 
 		int action = event.getAction();
-		boolean isDownAction = (action & 0x5) == 0x5 || action == MotionEvent.ACTION_DOWN
-				|| action == MotionEvent.ACTION_MOVE;
-
+		boolean isDownAction = (action & 0x5) == 0x5 || action == MotionEvent.ACTION_DOWN;
+				//|| action == MotionEvent.ACTION_MOVE;
 		// For loop runs for each detected point of contact on the device
-		for (int touchIndex = 0; touchIndex < event.getPointerCount(); touchIndex++)
+		if (isDownAction)
 			{
-				// Find the key where there is detected movement.
-				int x = (int) event.getX(touchIndex);
-				int y = (int) event.getY(touchIndex);
-
-				for (int buttonIndex = 0; buttonIndex < keys.length; buttonIndex++)
-					{
-						View button = keys[buttonIndex];
-						int[] location = new int[2];
-						button.getLocationOnScreen(location);
-						int buttonX = location[0];
-						int buttonY = location[1];
-						// Draw a rectangle to determine if the touch took place inside of a button, and then pass the action
-						Rect rect = new Rect(buttonX, buttonY, buttonX + button.getWidth(), buttonY
-								+ button.getHeight());
-						if (rect.contains(x, y))
+				for (int touchIndex = 0; touchIndex < event.getPointerCount(); touchIndex++)
+					{ //
+						// Find the key where there is detected movement.
+						int x = (int) event.getX(touchIndex);
+						int y = (int) event.getY(touchIndex);
+						for (int buttonIndex = 0; buttonIndex < keys.length; buttonIndex++)
 							{
-								newButtonStates[buttonIndex] = isDownAction;
-								buttonIndex = keys.length + 1;
+								View button = keys[buttonIndex];
+								int[] location = new int[2];
+								button.getLocationOnScreen(location);
+								int buttonX = location[0];
+								int buttonY = location[1];
+								// Draw a rectangle to determine if the touch took place inside of a button, and then pass the action
+								Rect rect = new Rect(buttonX, buttonY, buttonX + button.getWidth(), buttonY
+										+ button.getHeight());
+								if (rect.contains(x, y))
+									{
+										newButtonStates[buttonIndex] = isDownAction;
+										buttonIndex = keys.length + 1;
+									}
+							}
+						// If touch was detected within a button, play its respective sound
+						for (int index = 0; index < newButtonStates.length; index++)
+							{
+								if (buttonStates[index] != newButtonStates[index])
+									{
+										buttonStates[index] = newButtonStates[index];
+										View button = keys[index];
+										toggleButtonSound(button, newButtonStates[index]);
+									}
 							}
 					}
 			}
-		// If touch was detected within a button, play its respective sound
-		for (int index = 0; index < newButtonStates.length; index++)
+		else if(event.getAction() == MotionEvent.ACTION_UP)
 			{
-				if (buttonStates[index] != newButtonStates[index])
-					{
-						buttonStates[index] = newButtonStates[index];
-						View button = keys[index];
-						toggleButtonSound(button, newButtonStates[index]);
+				for (int touchIndex = 0; touchIndex < event.getPointerCount(); touchIndex++)
+					{ //
+						// Find the key where there is detected movement.
+						int x = (int) event.getX(touchIndex);
+						int y = (int) event.getY(touchIndex);
+						for (int buttonIndex = 0; buttonIndex < keys.length; buttonIndex++)
+							{
+								View button = keys[buttonIndex];
+								int[] location = new int[2];
+								button.getLocationOnScreen(location);
+								int buttonX = location[0];
+								int buttonY = location[1];
+								// Draw a rectangle to determine if the touch took place inside of a button, and then pass the action
+								Rect rect = new Rect(buttonX, buttonY, buttonX + button.getWidth(), buttonY
+										+ button.getHeight());
+								if (rect.contains(x, y))
+									{
+										newButtonStates[buttonIndex] = isDownAction;
+										buttonIndex = keys.length + 1;
+									}
+							}
+						// If touch was detected within a button, play its respective sound
+						for (int index = 0; index < newButtonStates.length; index++)
+							{
+								System.out.println("Index is" + index);
+								if (buttonStates[index] != newButtonStates[index])
+									{
+										buttonStates[index] = newButtonStates[index];
+										View button = keys[index];
+										toggleButtonSound(button, !newButtonStates[index]);
+									}
+							}
 					}
 			}
-
 		return true;
 	}
 
@@ -309,8 +337,7 @@ public class Keyboard extends Activity {
 	// Called each time the user sees the keyboard layout (e.g. if the user goes to the settings and goes back)
 	// Update the keyboard mappings with the user's desired Scale/Pitch/Root Note
 	@Override
-	public void onStart() 
-	{
+	public void onStart() {
 		super.onStart();
 		getPrefs();
 		Note rootNotes = new Note(notefile);
@@ -338,8 +365,7 @@ public class Keyboard extends Activity {
 	}
 
 	// Retrieve the settings from the Preferences menu
-	private void getPrefs() 
-	{
+	private void getPrefs() {
 
 		// Get the xml/preferences.xml preferences
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());

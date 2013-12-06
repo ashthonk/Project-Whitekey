@@ -286,11 +286,14 @@
                 android:id="@+id/songChooser"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
+                android:layout_gravity="center|start"
                 android:layout_weight="0.44"
                 android:entries="@array/BackTracks"
-                android:gravity="center" 
-                android:prompt="@string/songChooserPrompt"/>
+                android:gravity="center|bottom"
+                android:paddingBottom="0dp"
+                android:paddingRight="0dp"
+                android:paddingTop="0dp"
+                android:prompt="@string/songChooserPrompt" />
 
             <ImageView
                 android:id="@+id/ProjectLogo"
